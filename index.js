@@ -37,6 +37,9 @@ app.use("/", (req, res) => {
   return res.json("Hi");
 });
 
+// Error Handler
+app.use(errorHandler);
+
 // Listening/ connecting to a server
 app.listen(process.env.PORT || 5000, () =>
   console.log(`Server listening on port ${process.env.PORT || 5000}`)

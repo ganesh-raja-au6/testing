@@ -139,7 +139,7 @@ exports.resetPassword = asyncHandler(async (req, res) => {
 // @access  private
 exports.changePassword = asyncHandler(async (req, res) => {
   if (!req.user) {
-    return next(new ErrorResponse("Invalid request", 500))
+    return next(new ErrorResponse("Invalid request", 500));
   }
   const user = await User.findById(req.user._id);
   if (!user) {
@@ -147,12 +147,12 @@ exports.changePassword = asyncHandler(async (req, res) => {
   }
   const verified = await compare(req.body.oldPassword, user.password);
   if (!verified) {
-    return next(new ErrorResponse("Old password does not match", 403))
+    return next(new ErrorResponse("Old password does not match", 403));
   }
   const hashed = await hash(req.body.password, 10);
   user.password = hashed;
   user.save((err) => {
-    if (err) next(new ErrorResponse(err, 500))
+    if (err) next(new ErrorResponse(err, 500));
     return res.json({
       success: true,
       message: "Password changed successfully.",

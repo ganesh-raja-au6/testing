@@ -16,6 +16,12 @@ const { getUserById } = require(path.join(
   "controllers",
   "users"
 ));
+const { getPostById } = require(path.join(
+  __dirname,
+  "..",
+  "controllers",
+  "posts"
+));
 
 // Middlewares
 const { postsValidation } = require(path.join(
@@ -32,6 +38,20 @@ const { isAuthorized } = require(path.join(
   "isAuthorized"
 ));
 
-router.put('/', mood)
+router.get("/:userId", getPostsByUser);
+
+router.get("/:postId", getPostById);
+
+router.get("/", getAllPosts);
+
+router.delete("/:postId", isAuthorized, validUser, deletePost);
+
+router.put("/:postId", isAuthorized, validUser, updatePost);
+
+router.post("/", isAuthorized, createPost, postsValidation);
+
+router.param("userId", getUserById);
+
+router.param("postId", getPostById);
 
 module.exports = router;

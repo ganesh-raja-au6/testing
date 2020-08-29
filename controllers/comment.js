@@ -21,11 +21,12 @@ const { asyncHandler } = require(path.join(
 const User = require(path.join(__dirname, "..", "models", "User"));
 const Post = require(path.join(__dirname, "..", "models", "Post"));
 const Mood = require(path.join(__dirname, "..", "models", "mood"));
+const Comment = require(path.join(__dirname, "..", "models", "comment"));
 
-exports.mood = asyncHandler((req, res, next) => {
+exports.comment = asyncHandler((req, res, next) => {
     const post = req.post
     const user = req.user
-    const mood = new Mood({title : req.body.title, user, post})
-    await mood.save()
+    const comment = new Comment({title : req.body.title, user, post})
+    await comment.save()
     return res.json({success : true, message: 'post liked'})
 })

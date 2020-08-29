@@ -18,13 +18,12 @@ const { getUserById } = require(path.join(
 ));
 
 // Middlewares
-const { postsValidation } = require(path.join(
+const { validUser } = require(path.join(
   __dirname,
   "..",
   "middlewares",
-  "validatePosts"
+  "validUser"
 ));
-const { validUser } = require(path.join(__dirname, "..", "middlewares", "validUser"));
 const { isAuthorized } = require(path.join(
   __dirname,
   "..",
@@ -32,6 +31,6 @@ const { isAuthorized } = require(path.join(
   "isAuthorized"
 ));
 
-router.put('/', mood)
+router.put("/", isAuthorized, mood);
 
 module.exports = router;

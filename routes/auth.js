@@ -32,3 +32,11 @@ const { isAuthorized } = require(path.join(
 ));
 
 router.post("/signup", signupValidation, emailCheck, signup);
+router.post("/forgotPassword", forgotPassword);
+router.post("/resetPassword",resetPasswordValidation, resetPassword);
+router.post('/changePassword',isAuthorized, changePasswordValidation, changePassword)
+router.get("/verifyToken", verifyToken);
+router.post("/signin", signin);
+router.delete("/signout", isAuthorized, signout);
+
+module.exports = router;
